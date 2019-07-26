@@ -1,0 +1,6 @@
+model_checkpoint_path: "C:\\tensorflow\\plate_detector2\\models\\1306\\train\\model.ckpt-7252"
+all_model_checkpoint_paths: "C:\\tensorflow\\plate_detector2\\models\\1306\\train\\model.ckpt-0"
+all_model_checkpoint_paths: "C:\\tensorflow\\plate_detector2\\models\\1306\\train\\model.ckpt-2350"
+all_model_checkpoint_paths: "C:\\tensorflow\\plate_detector2\\models\\1306\\train\\model.ckpt-2351"
+all_model_checkpoint_paths: "C:\\tensorflow\\plate_detector2\\models\\1306\\train\\model.ckpt-4774"
+all_model_checkpoint_paths: "C:\\tensorflow\\plate_detector2\\models\\1306\\train\\model.ckpt-7252"
