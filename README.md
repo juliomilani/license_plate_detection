@@ -1,3 +1,7 @@
+Resultados se encontram na pasta imgs_out
+
+
+-------------------------
 How to test a new model in tensorflow object detection API:
 1) Configuring the object_detection/protos/pipeline.proto
 		ex: ssd_mobilenet_v2_placas/data/pipeline.config
