@@ -1,3 +1,14 @@
+Pré-requisitos para testar:
+ * Python 3
+ * Tensorflow
+ * Numpy
+ * OpenCV
+
+ Alterar pasta in_folder e out_folder em plate_finder_tf.py e executar o arquivo para localizar as placas de todas as imagens na pasta in_folder
+
+
+
+
 How to test a new model in tensorflow object detection API:
 1) Configuring the object_detection/protos/pipeline.proto
 		ex: ssd_mobilenet_v2_placas/data/pipeline.config
