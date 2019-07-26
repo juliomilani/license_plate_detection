@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Pré-requisitos para testar:
  * Python 3
  * Tensorflow
@@ -9,6 +10,12 @@ Pré-requisitos para testar:
 
 
 
+=======
+Resultados se encontram na pasta imgs_out
+
+
+-------------------------
+>>>>>>> 8ef711af0cbb860e5bb3310def09b1b22d49b9c5
 How to test a new model in tensorflow object detection API:
 1) Configuring the object_detection/protos/pipeline.proto
 		ex: ssd_mobilenet_v2_placas/data/pipeline.config
