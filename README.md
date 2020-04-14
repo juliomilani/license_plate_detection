@@ -5,6 +5,7 @@ Pré-requisitos para testar:
  * OpenCV
 
 Imagens teste se encontram na pasta teste_imgs e a resposta do sistema em teste_imgs_out
+Vídeo rede funcionando: https://youtu.be/7zgupFMNE1w
 
 Como detectar placas em outras imagens:
  
