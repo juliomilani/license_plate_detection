@@ -2,17 +2,35 @@ import numpy as np
 import tensorflow as tf
 import cv2 as cv
 import os
+import argparse
+
+
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument("--path_in", help="Input folder")
+parser.add_argument("--path_out", help="Output folder")
+args = parser.parse_args()
+
+if args.path_in is None:
+    in_folder = 'teste_imgs/'
+else:
+    in_folder = args.path_in
+
+if args.path_out is None:
+    out_folder = 'teste_imgs_out/'
+else:
+    out_folder = args.path_out
+
+paths = [os.path.join(in_folder,image) for image in os.listdir(in_folder)]
+paths_out = [os.path.join(out_folder,image) for image in os.listdir(in_folder)]
+
 
 # Read the graph.
-with tf.gfile.FastGFile('C:/tensorflow/plate_detector2/models/1306/out-7252/frozen_inference_graph.pb', 'rb') as f:
+with tf.gfile.FastGFile('models/out-7252/frozen_inference_graph.pb', 'rb') as f:
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
     tf.summary.FileWriter('logs', graph_def)
-
-in_folder = 'C:/tensorflow/plate_detector2/teste_imgs/'
-out_folder = 'C:/tensorflow/plate_detector2/teste_imgs_out/'
-paths = [os.path.join(in_folder,image) for image in os.listdir(in_folder)]
-paths_out = [os.path.join(out_folder,image) for image in os.listdir(in_folder)]
 
 
 with tf.Session() as sess:
@@ -38,10 +56,10 @@ with tf.Session() as sess:
 
         # Visualize detected bounding boxes.
         num_detections = int(out[0][0])
-        for i in range(num_detections):
-            classId = int(out[3][0][i])
-            score = float(out[1][0][i])
-            bbox = [float(v) for v in out[2][0][i]]
+        for j in range(num_detections):
+            classId = int(out[3][0][j])
+            score = float(out[1][0][j])
+            bbox = [float(v) for v in out[2][0][j]]
             if score > 0.1:
                 x = bbox[1] * cols
                 y = bbox[0] * rows
@@ -49,9 +67,7 @@ with tf.Session() as sess:
                 bottom = bbox[2] * rows
                 cv.rectangle(img, (int(x), int(y)), (int(right), int(bottom)), (125, 255, 51), thickness=2)
                 cv.putText(img,'{:03.2f}%'.format(score*100),(int(x),int(y)),cv.FONT_HERSHEY_SIMPLEX,1,(0,255,0),2)
-                print(score, bbox[1], bbox[0], bbox[3], bbox[2])
+                print("Found plate ",score*100,"%")
 
-        cv.imshow('Image', img)
-        cv.imwrite(paths_out[i],img)
-        cv.waitKey()
-        cv.destroyAllWindows()
+            cv.imwrite(paths_out[i],img)
+            print(paths_out[i]," saved")
