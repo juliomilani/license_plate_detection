@@ -9,6 +9,13 @@ Imagens teste se encontram na pasta teste_imgs e a resposta do sistema em teste_
 
 Vídeo rede funcionando: https://youtu.be/7zgupFMNE1w
 
+A rede foi treinada usando o data-set UTFPR-ALPR. Disponível, sob demanda:
+https://web.inf.ufpr.br/vri/databases/ufpr-alpr/
+
+A arquitetura da rede é: 
+faster_rcnn_inception_v2_coco_2018_01_28
+
+
 Como detectar placas em outras imagens:
  ```
 git clone https://github.com/juliomilani/license_plate_detection.git
