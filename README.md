@@ -5,6 +5,8 @@ Pré-requisitos para testar:
  * OpenCV
 
 Imagens teste se encontram na pasta teste_imgs e a resposta do sistema em teste_imgs_out
+![Plate Image](https://github.com/juliomilani/license_plate_detection/blob/master/teste_imgs_out/prefeitura_rio.jpg "Input image")
+
 Vídeo rede funcionando: https://youtu.be/7zgupFMNE1w
 
 Como detectar placas em outras imagens:
