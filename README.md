@@ -1,11 +1,8 @@
-Pré-requisitos para testar:
- * Python 3
- * Tensorflow
- * Numpy
- * OpenCV
+# ALPR: Automatic License Plate Reader
 
-Imagens teste se encontram na pasta teste_imgs e a resposta do sistema em teste_imgs_out
-![Plate Image](https://github.com/juliomilani/license_plate_detection/blob/master/teste_imgs_out/prefeitura_rio.jpg "Input image")
+Yet another CNN's based Automatic Plate Detection.
+
+![Plate Image](https://github.com/juliomilani/license_plate_detection/blob/master/teste_imgs_out/prefeitura_rio.png "Input image")
 
 Vídeo rede funcionando: https://youtu.be/7zgupFMNE1w
 
@@ -15,48 +12,63 @@ https://web.inf.ufpr.br/vri/databases/ufpr-alpr/
 A arquitetura da rede é: 
 faster_rcnn_inception_v2_coco_2018_01_28
 
+## Getting Started
 
-Como detectar placas em outras imagens:
- ```
-git clone https://github.com/juliomilani/license_plate_detection.git
-cd license_plate_detection
+To test with your own images you can clone this repo and run stremlit:
 
-#instala todos os pacotes necessários
-pip install requirements.txt
+```
+$ git clone https://github.com/juliomilani/license_plate_detection.git
+$ cd license_plate_detection
 
-python plate_finder_tf.py --path_in teste_imgs --path_out teste_imgs_out
+$ #instala todos os pacotes necessários
+$ pip install requirements.txt
+$ streamlit run st_app_ocr.py
+```
+Open the link in a browser.
 
---path_in: Pasta contendo arquivos de imagem para achar placas
---path_out: Pasta onde será salvo as imagens com as placas encontradas
+
+## Running on multiple images
+
+```
+python plate_finder_tf.py --path_in IN_FOLDER --path_out teste_imgs_out
+--path_in: In folder, containing only images
+--path_out: Folders where the annotated images will be stored
+
 ```
 
+## Retraining with your own dataset:
 
-Para treinar com outros dados basta seguir o tutorial:
+Follow the tutorial this on creating a tf_record (you can use create_tf_record.py as a model):
 https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/configuring_jobs.md
 
-Ao seguir o tutorial 
-
-How to test a new model in tensorflow object detection API:
-1) Configuring the object_detection/protos/pipeline.proto
-		ex: ssd_mobilenet_v2_placas/data/pipeline.config
-2) Programming create_tf_record.py
-
+Then running these commands:
 ```
 tensorboard --logdir=PATH_TO_LICENSE_PLATE_DETECTION/models/1306
 
 python model_main.py --pipeline_config_path=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/pipeline.config --model_dir=PATH_TO_LICENSE_PLATE_DETECTION/models/1306 --num_train_steps=50000 --sample_1_of_n_eval_examples=1 --alsologtostderr
 
-python C:\tensorflow\plate_detector2\eval.py --logtostderr --checkpoint_dir=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/train --eval_dir=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/eval --pipeline_config_path=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/pipeline.config
-python C:\tensorflow\plate_detector2\train.py --logtostderr --train_dir=C:\tensorflow\plate_detector2\models\1306\train --pipeline_config_path=C:\tensorflow\plate_detector2\models\1306\pipeline.config
+python eval.py --logtostderr --checkpoint_dir=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/train --eval_dir=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/eval --pipeline_config_path=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/pipeline.config
+python train.py --logtostderr --train_dir=C:\tensorflow\plate_detector2\models\1306\train --pipeline_config_path=C:\tensorflow\plate_detector2\models\1306\pipeline.config
 
-python C:\tensorflow\plate_detector2\export_inference_graph.py --input_type=image_tensor --pipeline_config_path=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/pipeline.config --trained_checkpoint_prefix=C:\tensorflow\plate_detector2\models\1306\train\model.ckpt-7252 --output_directory=PATH_TO_LICENSE_PLATE_DETECTION\models\1306\out-7252
+python export_inference_graph.py --input_type=image_tensor --pipeline_config_path=PATH_TO_LICENSE_PLATE_DETECTION/models/1306/pipeline.config --trained_checkpoint_prefix=C:\tensorflow\plate_detector2\models\1306\train\model.ckpt-7252 --output_directory=PATH_TO_LICENSE_PLATE_DETECTION\models\1306\out-7252
 ```
 
-Important fixes:
+When following the tutorial there's one change you have to make:
+
+Remove this part from pipeline.config: (I learned it the hardway)
 ```
 schedule {
 step: 0
 learning_rate: 0.000199999994948
 }
 ```
-removed from pipeline.config
+
+
+
+
+
+## Authors
+
+* **Julio Milani de Lucena** LAPSI - UFRGS - julio.lucena@ufrgs.br
+Orientador: Altamiro Susin
+
