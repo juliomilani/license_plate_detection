@@ -20,7 +20,7 @@ To test with your own images you can clone this repo and run stremlit:
 $ git clone https://github.com/juliomilani/license_plate_detection.git
 $ cd license_plate_detection
 
-$ #instala todos os pacotes necessários
+#instala todos os pacotes necessários
 $ pip install requirements.txt
 $ streamlit run st_app_ocr.py
 ```
