@@ -56,7 +56,7 @@ def find_plate(img_in):
             score = float(out[1][0][j])
             bbox = [float(v) for v in out[2][0][j]]
             if score > 0.1:
-                "Plate found! Confidence",score,
+                "Plate found! Confidence",'{:03.2f}%'.format(score*100)
                 x = bbox[1] * cols
                 y = bbox[0] * rows
                 right = bbox[3] * cols
@@ -65,10 +65,11 @@ def find_plate(img_in):
                 plate_number = plate_ocr(plate_img)
                 st.write(plate_number)
                 st.image(plate_img, channels="BGR",width=params.disp_width)
-                cv.putText(img_out,'{:03.2f}%'.format(score*100),(int(x),int(y)),cv.FONT_HERSHEY_SIMPLEX,1,(0,255,0),4)
+                cv.putText(img_out,plate_number,(int(x),int(y)),cv.FONT_HERSHEY_SIMPLEX,1,(0,255,0),3)
                 cv.rectangle(img_out, (int(x), int(y)), (int(right), int(bottom)), (0, 255, 0), thickness=4)
-            else:
-                "No plate found"         
+            
+        if num_detections == 0:
+            "No plate found"         
     return img_out 
 
 def plate_ocr(img):
